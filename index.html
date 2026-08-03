@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus Web Studio — Tu web lista para vender en 3 días</title>
+<meta name="description" content="Diseño y desarrollo de páginas web profesionales que convierten visitantes en clientes. Lista en 3 días o es gratis. Precio de fundador.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1440;
+  --navy-2:#0E1E5A;
+  --blue:#1E5BFF;
+  --cyan:#18C6E9;
+  --ink:#0B1330;
+  --muted:#586080;
+  --line:#E5E9F5;
+  --bg:#FFFFFF;
+  --bg-soft:#F4F7FD;
+  --white:#FFFFFF;
+  --grad:linear-gradient(135deg,var(--cyan),var(--blue));
+  --grad-navy:linear-gradient(160deg,#0B1846,#0A1440 60%,#081038);
+  --shadow:0 18px 50px -20px rgba(12,26,80,.28);
+  --shadow-sm:0 8px 24px -12px rgba(12,26,80,.25);
+  --r:18px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--ink);background:var(--bg);line-height:1.6;
+  text-align:center;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+h1,h2,h3{font-family:'Sora',sans-serif;line-height:1.12;margin:0;color:var(--navy);letter-spacing:-.02em}
+h1{font-size:clamp(2rem,5.2vw,3.5rem);font-weight:800}
+h2{font-size:clamp(1.6rem,3.8vw,2.5rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.narrow{max-width:760px;margin-left:auto;margin-right:auto}
+section{padding:clamp(56px,8vw,104px) 0}
+.soft{background:var(--bg-soft)}
+.eyebrow{
+  display:inline-block;font-family:'Sora';font-weight:700;font-size:.78rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--blue);
+  margin-bottom:16px;
+}
+.lead{font-size:clamp(1.05rem,2vw,1.22rem);color:var(--muted);margin-top:18px}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Sora';font-weight:700;font-size:1rem;
+  padding:15px 30px;border-radius:999px;border:0;cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+  text-align:center;
+}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 12px 30px -10px rgba(30,91,255,.6)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px -10px rgba(30,91,255,.7)}
+.btn-ghost{background:transparent;color:var(--navy);border:1.6px solid var(--line)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+.btn-wa{background:#25D366;color:#fff;box-shadow:0 12px 30px -12px rgba(37,211,102,.6)}
+.btn-wa:hover{transform:translateY(-2px);filter:brightness(1.03)}
+.btn-lg{padding:18px 38px;font-size:1.08rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px}
+
+/* Announcement + nav */
+.topbar{
+  background:var(--grad);color:#fff;font-family:'Sora';font-weight:600;
+  font-size:.86rem;padding:9px 16px;text-align:center;letter-spacing:.01em;
+}
+.nav-wrap{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.86);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  max-width:1080px;margin:0 auto;padding:12px 22px}
+.brand img{height:38px;width:auto;display:block}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-weight:600;font-size:.95rem;color:var(--ink);opacity:.82}
+.nav-links a:hover{opacity:1;color:var(--blue)}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.hamburger{display:none;background:none;border:0;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.hamburger span{width:24px;height:2.4px;background:var(--navy);border-radius:2px;transition:.25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Hero */
+.hero{padding:clamp(48px,7vw,84px) 0 clamp(48px,7vw,88px);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:
+    radial-gradient(60% 55% at 50% 0%,rgba(24,198,233,.12),transparent 70%),
+    radial-gradient(50% 40% at 80% 30%,rgba(30,91,255,.10),transparent 70%)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:7px 16px;font-size:.82rem;font-weight:600;color:var(--muted);
+  box-shadow:var(--shadow-sm);margin-bottom:22px}
+.dot{width:8px;height:8px;border-radius:50%;background:#25D366;box-shadow:0 0 0 4px rgba(37,211,102,.18)}
+.hero h1 span{display:inline}
+.hero-note{margin-top:22px;font-size:.92rem;color:var(--muted);display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+.hero-note b{color:var(--navy)}
+.check{color:#12B886;font-weight:800}
+
+/* Cards / grids */
+.grid{display:grid;gap:20px;margin-top:44px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 26px;
+  box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.ic{width:54px;height:54px;border-radius:14px;background:var(--grad);display:grid;place-items:center;
+  margin:0 auto 16px;color:#fff}
+.ic svg{width:26px;height:26px}
+.card p{color:var(--muted);margin-top:8px;font-size:.98rem}
+
+/* Steps */
+.steps{counter-reset:s;display:grid;gap:18px;margin-top:44px;grid-template-columns:repeat(5,1fr)}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 18px;position:relative}
+.step .n{counter-increment:s;width:40px;height:40px;border-radius:50%;background:var(--grad);color:#fff;
+  font-family:'Sora';font-weight:800;display:grid;place-items:center;margin:0 auto 14px}
+.step .n::before{content:counter(s)}
+.step h3{font-size:1.02rem}
+.step p{color:var(--muted);font-size:.9rem;margin-top:6px}
+
+/* Stack / includes */
+.stack{max-width:820px;margin:44px auto 0;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;text-align:left}
+.stack .it{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:16px 18px}
+.stack .it svg{flex:0 0 auto;width:22px;height:22px;color:#12B886;margin-top:2px}
+.stack .it b{display:block;font-family:'Sora';font-size:.98rem;color:var(--navy)}
+.stack .it span{font-size:.9rem;color:var(--muted)}
+
+/* Calculator */
+.calc{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);
+  max-width:860px;margin:44px auto 0;padding:clamp(26px,4vw,44px);text-align:left}
+.calc h3{text-align:center;font-size:1.15rem;margin-bottom:6px}
+.calc .sub{text-align:center;color:var(--muted);font-size:.95rem;margin-bottom:28px}
+.field{margin-bottom:26px}
+.field>label{display:block;font-family:'Sora';font-weight:700;font-size:.82rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:14px;text-align:center}
+.opts{display:grid;gap:12px;grid-template-columns:repeat(3,1fr)}
+.opt{position:relative;cursor:pointer}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.opt .box{border:1.6px solid var(--line);border-radius:14px;padding:16px 14px;text-align:center;
+  transition:.18s;height:100%;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.opt .box b{font-family:'Sora';font-size:1rem;color:var(--navy)}
+.opt .box small{color:var(--muted);font-size:.82rem}
+.opt input:checked + .box{border-color:var(--blue);background:rgba(30,91,255,.05);
+  box-shadow:0 0 0 3px rgba(30,91,255,.12)}
+.opts.extras{grid-template-columns:repeat(2,1fr)}
+.opt.ex .box{flex-direction:row;justify-content:space-between;align-items:center;text-align:left;gap:10px}
+.opt.ex .box small{white-space:nowrap;font-weight:600;color:var(--blue)}
+.result{margin-top:8px;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+.result .market{background:var(--bg-soft);padding:22px;text-align:center}
+.result .market .lbl{font-size:.82rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.result .market .amt{font-family:'Sora';font-weight:800;font-size:clamp(1.9rem,5vw,2.6rem);color:var(--muted);
+  text-decoration:line-through;text-decoration-color:rgba(220,60,60,.55);text-decoration-thickness:2px}
+.result .nexus{background:var(--grad-navy);color:#fff;padding:26px 22px;text-align:center}
+.result .nexus .lbl{font-size:.82rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.result .nexus .amt{font-family:'Sora';font-weight:800;font-size:clamp(2.4rem,7vw,3.4rem);margin:4px 0}
+.result .nexus .amt small{font-size:1rem;font-weight:600;opacity:.85;-webkit-text-decoration:none;text-decoration:none}
+.result .nexus .maint{font-size:.95rem;opacity:.9;margin-top:2px}
+.result .nexus .save{display:inline-block;margin-top:12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  padding:6px 14px;border-radius:999px;font-size:.85rem;font-weight:600}
+.calc .cta-row{margin-top:26px}
+.finorder{font-size:.8rem;color:var(--muted);text-align:center;margin-top:16px}
+
+/* Guarantee (dark) */
+.guarantee{background:var(--grad-navy);color:#fff}
+.guarantee h2{color:#fff}
+.guarantee .lead{color:rgba(255,255,255,.8)}
+.badge-g{width:96px;height:96px;border-radius:50%;background:rgba(24,198,233,.14);
+  border:1.5px solid rgba(24,198,233,.5);display:grid;place-items:center;margin:0 auto 26px;color:var(--cyan)}
+.badge-g svg{width:46px;height:46px}
+.guarantee .fine{margin-top:22px;font-size:.9rem;color:rgba(255,255,255,.6)}
+
+/* Offer card */
+.offer{background:#fff;border:1.5px solid var(--line);border-radius:26px;box-shadow:var(--shadow);
+  max-width:640px;margin:0 auto;padding:clamp(30px,4vw,46px);position:relative;overflow:hidden}
+.offer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--grad)}
+.offer .tag{display:inline-block;background:rgba(30,91,255,.1);color:var(--blue);font-family:'Sora';
+  font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;padding:7px 16px;border-radius:999px;margin-bottom:18px}
+.price-big{font-family:'Sora';font-weight:800;font-size:clamp(3rem,9vw,4rem);color:var(--navy);line-height:1}
+.price-big small{font-size:1.1rem;font-weight:600;color:var(--muted)}
+.price-sub{color:var(--muted);margin-top:6px}
+.offer ul{list-style:none;padding:0;margin:26px auto 0;max-width:420px;text-align:left;display:grid;gap:12px}
+.offer li{display:flex;gap:11px;align-items:flex-start;font-size:.98rem}
+.offer li svg{flex:0 0 auto;width:21px;height:21px;color:#12B886;margin-top:3px}
+.scarcity{display:inline-flex;align-items:center;gap:8px;background:#FFF4E5;color:#B4690E;
+  border:1px solid #FCE0B6;border-radius:999px;padding:8px 18px;font-weight:600;font-size:.9rem;margin-bottom:26px}
+
+/* For whom */
+.fw{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:44px;text-align:left}
+.fw .col{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.fw .col h3{display:flex;align-items:center;gap:10px}
+.fw ul{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:11px}
+.fw li{display:flex;gap:10px;font-size:.96rem;color:var(--muted)}
+.fw li svg{flex:0 0 auto;width:19px;height:19px;margin-top:3px}
+.yes li svg{color:#12B886}.no li svg{color:#E0607A}
+
+/* FAQ */
+.faq{max-width:760px;margin:40px auto 0;text-align:left}
+.qa{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.qa button{width:100%;text-align:left;background:none;border:0;cursor:pointer;padding:20px 22px;
+  font-family:'Sora';font-weight:600;font-size:1.02rem;color:var(--navy);display:flex;
+  justify-content:space-between;align-items:center;gap:16px}
+.qa .ans{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted)}
+.qa .ans p{padding:0 22px 20px}
+.qa . chev,.qa .chev{transition:transform .3s;flex:0 0 auto}
+.qa.open .chev{transform:rotate(180deg)}
+.qa.open .ans{max-height:340px}
+
+/* Contact form */
+.contact{background:var(--grad-navy);color:#fff}
+.contact h2{color:#fff}
+.contact .lead{color:rgba(255,255,255,.82)}
+.form-card{background:#fff;border-radius:22px;box-shadow:var(--shadow);max-width:520px;margin:34px auto 0;
+  padding:clamp(26px,4vw,38px);text-align:left;color:var(--ink)}
+.form-card label{font-family:'Sora';font-weight:600;font-size:.86rem;color:var(--navy);display:block;margin:0 0 7px}
+.form-card input,.form-card textarea{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;
+  font-family:inherit;font-size:1rem;margin-bottom:16px;background:#fff;color:var(--ink);transition:.15s}
+.form-card input:focus,.form-card textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,91,255,.14)}
+.form-card textarea{min-height:90px;resize:vertical}
+.form-card .btn{width:100%}
+.err{color:#D6455F;font-size:.85rem;margin:-10px 0 14px;display:none}
+.err.show{display:block}
+.form-sep{text-align:center;color:var(--muted);font-size:.85rem;margin:16px 0}
+.success{display:none;text-align:center;padding:16px 6px}
+.success.show{display:block}
+.success .tick{width:70px;height:70px;border-radius:50%;background:rgba(18,184,134,.12);color:#12B886;
+  display:grid;place-items:center;margin:0 auto 16px}
+.success h3{margin-bottom:8px}
+.success p{color:var(--muted);margin-bottom:20px}
+
+/* Footer */
+footer{background:var(--navy);color:rgba(255,255,255,.7);padding:48px 0 34px;text-align:center}
+.foot-brand{font-family:'Sora';font-weight:800;font-size:1.5rem;color:#fff;letter-spacing:-.01em}
+.foot-brand span{color:var(--cyan)}
+.foot-tag{font-family:'Sora';font-weight:600;letter-spacing:.28em;font-size:.7rem;color:var(--cyan);
+  text-transform:uppercase;margin-top:2px}
+.foot-links{display:flex;gap:22px;justify-content:center;margin:22px 0;flex-wrap:wrap}
+.foot-links a{color:rgba(255,255,255,.75);font-size:.92rem}
+.foot-links a:hover{color:#fff}
+.foot-copy{font-size:.82rem;color:rgba(255,255,255,.45);margin-top:14px}
+
+/* Reveal */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.is-visible{opacity:1;transform:none}
+
+/* Responsive */
+@media(max-width:860px){
+  .g3,.steps{grid-template-columns:repeat(2,1fr)}
+  .stack,.fw{grid-template-columns:1fr}
+  .opts{grid-template-columns:1fr}
+  .opts.extras{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,300px);background:#fff;
+    flex-direction:column;justify-content:center;gap:26px;transform:translateX(100%);
+    transition:transform .3s ease;box-shadow:-20px 0 50px -20px rgba(12,26,80,.35);z-index:70;padding:40px}
+  .nav-links.open{transform:translateX(0)}
+  .nav-links a{font-size:1.1rem}
+  .hamburger{display:flex;z-index:80}
+  .nav-cta .btn{padding:11px 18px;font-size:.9rem}
+  .g3,.steps{grid-template-columns:1fr}
+  .hero-note{gap:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== BARRA DE ESCASEZ (real: cupos de fundador) ===== -->
+<div class="topbar">🚀 Precio de fundador — abierto solo para mis primeros 3 clientes</div>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <nav class="nav">
+    <a class="brand" href="#top" aria-label="Nexus Web Studio — inicio">
+      <img src="{{LOGO_URI}}" alt="Nexus Web Studio">
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#servicios">Qué incluye</a>
+      <a href="#calculadora">Calcula tu web</a>
+      <a href="#garantia">Garantía</a>
+      <a href="#faq">Preguntas</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-wa" href="https://wa.me/584125205727?text=Hola%20Nexus,%20quiero%20mi%20p%C3%A1gina%20web%20%F0%9F%9A%80" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="hamburger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</div>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="wrap narrow">
+    <span class="pill reveal"><span class="dot"></span> Nexus Web Studio · Diseño & Desarrollo Web</span>
+    <h1 class="reveal">Tu web profesional,<br><span class="grad-text">lista para vender en 3 días.</span></h1>
+    <p class="lead reveal">Creamos sitios modernos que generan confianza y convierten visitantes en clientes.
+      Tú solo nos cuentas de tu negocio una vez — del resto me encargo yo.</p>
+    <div class="cta-row reveal">
+      <a class="btn btn-primary btn-lg" href="#calculadora">Calcular el precio de mi web</a>
+      <a class="btn btn-ghost btn-lg" href="https://wa.me/584125205727?text=Hola%20Nexus,%20quiero%20mi%20p%C3%A1gina%20web%20%F0%9F%9A%80" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+    </div>
+    <div class="hero-note reveal">
+      <span><span class="check">✓</span> Lista en <b>3 días o es gratis</b></span>
+      <span><span class="check">✓</span> No pagas hasta <b>aprobar el diseño</b></span>
+      <span><span class="check">✓</span> Adaptada a <b>celular</b></span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PROBLEMA / DESEO ===== -->
+<section class="soft">
+  <div class="wrap">
+    <span class="eyebrow reveal">La verdad incómoda</span>
+    <h2 class="reveal narrow">Una web "bonita" no te trae clientes. Una web que <span class="grad-text">convierte</span>, sí.</h2>
+    <p class="lead narrow reveal">La mayoría de las páginas se ven lindas y no venden nada: cargan lento, no funcionan
+      en el celular y no le dicen al visitante qué hacer. Nosotros diseñamos para el resultado, no solo para la foto.</p>
+    <div class="grid g3">
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.9 7.2 17.7l.9-5.4L4.2 8.5l5.4-.8L12 2z"/></svg></div>
+        <h3>Genera confianza</h3>
+        <p>Un sitio profesional hace que te vean serio y establecido, aunque estés empezando. La primera impresión decide.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
+        <h3>Atrae clientes</h3>
+        <p>Optimizada para Google y para el celular, para que te encuentren y te escriban — no que se pierdan buscándote.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <h3>Aumenta ventas</h3>
+        <p>Cada sección guía al visitante hacia la acción: escribirte, cotizar o comprar. Tu web trabajando 24/7.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CÓMO FUNCIONA ===== -->
+<section id="proceso">
+  <div class="wrap">
+    <span class="eyebrow reveal">Cómo trabajamos</span>
+    <h2 class="reveal narrow">Un proceso simple, sin complicaciones técnicas para ti</h2>
+    <div class="steps">
+      <div class="step reveal"><div class="n"></div><h3>Charlamos</h3><p>Me cuentas de tu negocio y qué necesitas.</p></div>
+      <div class="step reveal"><div class="n"></div><h3>Diseñamos</h3><p>Definimos estructura y estilo a tu medida.</p></div>
+      <div class="step reveal"><div class="n"></div><h3>Desarrollo</h3><p>Construyo tu web completa y optimizada.</p></div>
+      <div class="step reveal"><div class="n"></div><h3>Ajustes</h3><p>Revisamos juntos hasta que quede perfecta.</p></div>
+      <div class="step reveal"><div class="n"></div><h3>Publicamos</h3><p>Tu sitio en línea, listo para recibir clientes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUÉ INCLUYE (STACK) ===== -->
+<section id="servicios" class="soft">
+  <div class="wrap">
+    <span class="eyebrow reveal">Todo incluido</span>
+    <h2 class="reveal narrow">Lo que recibes con tu web Nexus</h2>
+    <p class="lead narrow reveal">No es solo "una página". Es todo lo que tu negocio necesita para estar en línea y vender, listo y funcionando.</p>
+    <div class="stack">
+      <div class="it reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg><div><b>Diseño 100% a medida</b><span>Nada de plantillas genéricas — hecho para tu marca.</span></div></div>
+      <div class="it reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg><div><b>Textos que venden</b><span>Escritos para convencer, no solo para rellenar.</span></div></div>
+      <div class="it reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg><div><b>Adaptada al celular</b><span>Se ve perfecta en teléfono, tablet y computadora.</span></div></div>
+      <div class="it reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg><div><b>Optimización para Google (SEO)</b><span>Para que te encuentren cuando te buscan.</span></div></div>
+      <div class="it reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg><div><b>Carga rápida y segura (SSL)</b><span>Sitio veloz y con candado de seguridad.</span></div></div>
+      <div class="it reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg><div><b>WhatsApp, redes y formulario</b><span>Todos tus canales de contacto conectados.</span></div></div>
+      <div class="it reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg><div><b>Medición con Google Analytics</b><span>Ve cuánta gente visita tu web y desde dónde.</span></div></div>
+      <div class="it reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg><div><b>Dominio y hosting configurados</b><span>Yo me encargo de la parte técnica. Tú, tranquilo.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CALCULADORA (ANCLA DE PRECIO) ===== -->
+<section id="calculadora">
+  <div class="wrap">
+    <span class="eyebrow reveal">Calcula tu web</span>
+    <h2 class="reveal narrow">Descubre cuánto costaría tu web… y cuánto pagas con Nexus</h2>
+    <p class="lead narrow reveal">Arma la web que necesitas y mira el precio real en el mercado. Después te muestro tu precio de fundador.</p>
+
+    <div class="calc reveal">
+      <h3>Arma tu página web</h3>
+      <p class="sub">Elige el tipo y lo que quieres incluir</p>
+
+      <div class="field">
+        <label>1 · ¿Qué tipo de web necesitas?</label>
+        <div class="opts" id="tipo">
+          <label class="opt"><input type="radio" name="tipo" value="350" data-name="Landing page" checked>
+            <div class="box"><b>Landing page</b><small>Una sola página de venta</small></div></label>
+          <label class="opt"><input type="radio" name="tipo" value="750" data-name="Web de negocio">
+            <div class="box"><b>Web de negocio</b><small>Varias secciones</small></div></label>
+          <label class="opt"><input type="radio" name="tipo" value="1500" data-name="Tienda en línea">
+            <div class="box"><b>Tienda en línea</b><small>Vende productos</small></div></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>2 · ¿Qué quieres incluir?</label>
+        <div class="opts extras" id="extras">
+          <label class="opt ex"><input type="checkbox" value="200" checked>
+            <div class="box"><span>Diseño 100% a medida</span><small>+$200</small></div></label>
+          <label class="opt ex"><input type="checkbox" value="150" checked>
+            <div class="box"><span>Textos que venden</span><small>+$150</small></div></label>
+          <label class="opt ex"><input type="checkbox" value="120" checked>
+            <div class="box"><span>SEO para Google</span><small>+$120</small></div></label>
+          <label class="opt ex"><input type="checkbox" value="90" checked>
+            <div class="box"><span>Adaptación a celular</span><small>+$90</small></div></label>
+          <label class="opt ex"><input type="checkbox" value="70" checked>
+            <div class="box"><span>WhatsApp + redes + formulario</span><small>+$70</small></div></label>
+          <label class="opt ex"><input type="checkbox" value="50" checked>
+            <div class="box"><span>Google Analytics</span><small>+$50</small></div></label>
+        </div>
+      </div>
+
+      <div class="result">
+        <div class="market">
+          <div class="lbl">Precio promedio en el mercado (referencial)</div>
+          <div class="amt" id="market">$0</div>
+        </div>
+        <div class="nexus">
+          <div class="lbl">Tu precio de fundador con Nexus</div>
+          <div class="amt">$100 <small>único</small></div>
+          <div class="maint">+ $20/mes de mantenimiento — <b>congelado para siempre</b></div>
+          <div class="save" id="save">Ahorras $0</div>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn-wa btn-lg" id="calcWa" href="https://wa.me/584125205727" target="_blank" rel="noopener">Quiero mi web por $100 →</a>
+      </div>
+      <p class="finorder">Precios de mercado aproximados y solo de referencia. Tu precio con Nexus es plano: $100 + $20/mes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GARANTÍA ===== -->
+<section id="garantia" class="guarantee">
+  <div class="wrap narrow">
+    <div class="badge-g reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+    <span class="eyebrow reveal" style="color:var(--cyan)">Sin riesgo para ti</span>
+    <h2 class="reveal">Tu web lista en 3 días… o es <span class="grad-text">gratis</span>.</h2>
+    <p class="lead reveal">Estoy tan seguro de mi trabajo que lo pongo por escrito: entrego tu web en <b>3 días hábiles
+      desde que recibo todo tu contenido</b> (textos, logo e imágenes). Si no cumplo, no me pagas la web.</p>
+    <p class="fine reveal">Y como capa extra de seguridad: no pagas la parte final hasta que apruebes el diseño.
+      El riesgo lo asumo yo, no tú.</p>
+  </div>
+</section>
+
+<!-- ===== OFERTA DE FUNDADOR ===== -->
+<section class="soft">
+  <div class="wrap">
+    <span class="eyebrow reveal">La oferta</span>
+    <h2 class="reveal narrow" style="margin-bottom:36px">Precio de fundador — solo mis primeros 3 clientes</h2>
+    <div class="offer reveal">
+      <span class="scarcity">⏳ Cupos limitados: solo 3 clientes fundadores</span>
+      <div class="tag">Página web completa</div>
+      <div class="price-big">$100 <small>pago único</small></div>
+      <div class="price-sub">+ $20/mes de mantenimiento — <b>congelado de por vida</b> por ser fundador</div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Todo lo que incluye la web Nexus (diseño, textos, SEO, móvil, seguridad y contacto).</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Garantía de 3 días o es gratis.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Tu mantenimiento nunca sube de precio, mientras el resto pagará más.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> A cambio, solo te pido tu testimonio y permiso para mostrar el resultado.</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="https://wa.me/584125205727?text=Hola%20Nexus,%20quiero%20uno%20de%20los%20cupos%20de%20fundador%20por%20%24100%20%F0%9F%9A%80" target="_blank" rel="noopener">Quiero un cupo de fundador</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARA QUIÉN ===== -->
+<section>
+  <div class="wrap narrow">
+    <span class="eyebrow reveal">¿Es para ti?</span>
+    <h2 class="reveal">Trabajemos juntos si…</h2>
+    <div class="fw">
+      <div class="col yes reveal">
+        <h3>✅ Es para ti</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Tienes un negocio, emprendimiento o servicio y aún no tienes web (o la tuya se ve vieja).</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Quieres verte profesional y que te encuentren en internet.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Prefieres que alguien se encargue de todo por ti.</li>
+        </ul>
+      </div>
+      <div class="col no reveal">
+        <h3>🚫 No es para ti</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> Buscas el precio más bajo sin importar la calidad.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> No tienes claro qué ofrece tu negocio ni a quién.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> Esperas ventas mágicas sin mover tu negocio.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="soft">
+  <div class="wrap">
+    <span class="eyebrow reveal">Preguntas frecuentes</span>
+    <h2 class="reveal narrow">Lo que quizá te estás preguntando</h2>
+    <div class="faq">
+      <div class="qa reveal"><button>¿Por qué solo $100 si una web cuesta mucho más? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="ans"><p>Porque estoy comenzando y construyendo mi portafolio. Por eso abro precio de fundador a mis primeros clientes a cambio de su testimonio. La calidad es la misma que cobraré mucho más caro después — quien entra ahora se queda con la ventaja.</p></div></div>
+      <div class="qa reveal"><button>¿De verdad la entregan en 3 días? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="ans"><p>Sí: 3 días hábiles contados desde que me envías todo tu contenido (textos, logo e imágenes). Si no cumplo, la web es gratis. Así de simple.</p></div></div>
+      <div class="qa reveal"><button>¿El dominio y el hosting están incluidos? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="ans"><p>Yo configuro toda la parte técnica por ti. El costo del dominio y hosting depende del proveedor que elijas; te asesoro para tomar la opción más conveniente y económica. Tú no tocas nada complicado.</p></div></div>
+      <div class="qa reveal"><button>¿Qué incluye el mantenimiento de $20/mes? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="ans"><p>Mantengo tu web actualizada, segura y funcionando, y hago cambios menores cuando los necesites. Como cliente fundador, ese precio nunca te sube — aunque a los demás sí.</p></div></div>
+      <div class="qa reveal"><button>¿Puedo pedir cambios después? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="ans"><p>Claro. Durante el proyecto ajustamos hasta que apruebes el diseño, y después el mantenimiento cubre los cambios menores del día a día.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACTO / CIERRE ===== -->
+<section id="contacto" class="contact">
+  <div class="wrap narrow">
+    <span class="eyebrow reveal" style="color:var(--cyan)">Empecemos</span>
+    <h2 class="reveal">Cuéntame sobre tu proyecto</h2>
+    <p class="lead reveal">Déjame tus datos y te escribo, o contáctame directo por WhatsApp ahora mismo.</p>
+
+    <div class="form-card reveal">
+      <form id="lead-form" novalidate>
+        <label for="nombre">Tu nombre</label>
+        <input id="nombre" name="nombre" type="text" placeholder="Ej. María González" autocomplete="name">
+        <label for="correo">Tu correo</label>
+        <input id="correo" name="correo" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+        <div class="err" id="formErr">Revisa tu nombre y un correo válido.</div>
+        <label for="mensaje">¿Qué necesitas? (opcional)</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Cuéntame brevemente de tu negocio y qué web quieres…"></textarea>
+        <button type="submit" class="btn btn-primary btn-lg">Solicitar mi web</button>
+      </form>
+      <div class="form-sep">— o —</div>
+      <a class="btn btn-wa" style="width:100%" href="https://wa.me/584125205727?text=Hola%20Nexus,%20quiero%20mi%20p%C3%A1gina%20web%20%F0%9F%9A%80" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+
+      <div class="success" id="formOk">
+        <div class="tick"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>¡Recibido! 🎉</h3>
+        <p>Gracias por tu interés. Te contactaré muy pronto. Para ir más rápido, escríbeme por WhatsApp:</p>
+        <a class="btn btn-wa" href="https://wa.me/584125205727?text=Hola%20Nexus,%20acabo%20de%20dejar%20mis%20datos%20en%20tu%20web%20%F0%9F%9A%80" target="_blank" rel="noopener">Abrir WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+  ===== TESTIMONIOS (DESACTIVADO) =====
+  Cuando tengas clientes reales, activa esta sección pegando testimonios verdaderos.
+  NO inventes testimonios: perjudica tu credibilidad y va contra la confianza que vende tu marca.
+  <section class="soft">
+    <div class="wrap">
+      <span class="eyebrow">Clientes felices</span>
+      <h2>Lo que dicen de Nexus</h2>
+      <div class="grid g3">
+        <div class="card"><p>"[testimonio real del cliente]"</p><b>Nombre — Negocio</b></div>
+      </div>
+    </div>
+  </section>
+-->
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">NE<span>XUS</span></div>
+    <div class="foot-tag">Web Studio</div>
+    <div class="foot-links">
+      <a href="#servicios">Qué incluye</a>
+      <a href="#calculadora">Calcula tu web</a>
+      <a href="#garantia">Garantía</a>
+      <a href="#contacto">Contacto</a>
+      <a href="https://wa.me/584125205727" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <p class="foot-copy">© <span id="year"></span> Nexus Web Studio · Diseño y desarrollo web profesional</p>
+  </div>
+</footer>
+
+<script>
+const WA = "584125205727";
+const FORM_ENDPOINT = ""; // <-- PEGA AQUÍ tu enlace de Formspree o Google Apps Script (si lo dejas vacío, igual muestra el mensaje de éxito)
+
+function init(fn){ try{ fn(); }catch(e){ console.error(e); } }
+
+/* Aparición al hacer scroll con red de seguridad a los 6s */
+function setupReveal(){
+  const items = document.querySelectorAll('.reveal');
+  const show = el => el.classList.add('is-visible');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{ if(en.isIntersecting){ show(en.target); io.unobserve(en.target); } });
+    },{threshold:0.12});
+    items.forEach(el=>io.observe(el));
+  } else { items.forEach(show); }
+  setTimeout(()=>items.forEach(show), 6000);
+}
+
+/* Menú hamburguesa */
+function setupMenu(){
+  const burger = document.getElementById('burger');
+  const links = document.getElementById('navLinks');
+  if(!burger||!links) return;
+  const toggle = (open)=>{
+    links.classList.toggle('open', open);
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true':'false');
+  };
+  burger.addEventListener('click', ()=> toggle(!links.classList.contains('open')));
+  links.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> toggle(false)));
+}
+
+/* FAQ acordeón */
+function setupFaq(){
+  document.querySelectorAll('.qa button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const qa = b.parentElement;
+      const wasOpen = qa.classList.contains('open');
+      document.querySelectorAll('.qa').forEach(x=>x.classList.remove('open'));
+      if(!wasOpen) qa.classList.add('open');
+    });
+  });
+}
+
+/* Calculadora ancla-precio */
+function setupCalc(){
+  const tipo = document.getElementById('tipo');
+  const extras = document.getElementById('extras');
+  const marketEl = document.getElementById('market');
+  const saveEl = document.getElementById('save');
+  const waBtn = document.getElementById('calcWa');
+  if(!tipo||!extras||!marketEl) return;
+
+  let shown = 0;
+  const animate = (to)=>{
+    const from = shown; const start = performance.now(); const dur = 500;
+    const stepFn = (t)=>{
+      const p = Math.min(1,(t-start)/dur);
+      const val = Math.round(from + (to-from)*(1-Math.pow(1-p,3)));
+      marketEl.textContent = '$' + val.toLocaleString('en-US');
+      if(p<1) requestAnimationFrame(stepFn); else shown = to;
+    };
+    requestAnimationFrame(stepFn);
+  };
+
+  const calc = ()=>{
+    const base = parseInt(tipo.querySelector('input:checked').value,10) || 0;
+    const name = tipo.querySelector('input:checked').dataset.name || 'web';
+    let add = 0;
+    extras.querySelectorAll('input:checked').forEach(i=> add += parseInt(i.value,10)||0);
+    const market = base + add;
+    animate(market);
+    const save = Math.max(0, market - 100);
+    saveEl.textContent = 'Ahorras $' + save.toLocaleString('en-US') + ' en tu inversión inicial';
+    const msg = 'Hola Nexus, quiero mi ' + name + ' por $100 (precio de fundador). En el mercado costaría ~$' + market.toLocaleString('en-US') + '.';
+    waBtn.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+  };
+
+  tipo.addEventListener('change', calc);
+  extras.addEventListener('change', calc);
+  calc();
+}
+
+/* Formulario: sin página de gracias — muestra éxito en la misma página */
+function setupForm(){
+  const form = document.getElementById('lead-form');
+  const err = document.getElementById('formErr');
+  const ok = document.getElementById('formOk');
+  if(!form) return;
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const nombre = form.nombre.value.trim();
+    const correo = form.correo.value.trim();
+    const valid = nombre && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo);
+    if(!valid){ err.classList.add('show'); return; }
+    err.classList.remove('show');
+    const data = Object.fromEntries(new FormData(form).entries());
+    try{
+      if(FORM_ENDPOINT){
+        await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+      }
+    }catch(e2){ console.error(e2); }
+    form.style.display = 'none';
+    if(ok) ok.classList.add('show');
+  });
+}
+
+function setupYear(){ const y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear(); }
+
+init(setupReveal);
+init(setupMenu);
+init(setupFaq);
+init(setupCalc);
+init(setupForm);
+init(setupYear);
+</script>
+</body>
+</html>
