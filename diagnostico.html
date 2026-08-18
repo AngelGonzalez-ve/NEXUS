@@ -249,12 +249,30 @@ input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,9
 
 <script>
 /* ====== CONFIGURA AQUÍ ====== */
-const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwnSv09GcjPb4riLrQDfkKvkFkvReZ9XILTWL4Pl6T1muAvblCPLNu2zVeT2gdS_1Ok/exec"; // <-- PEGA la URL /exec de tu Apps Script (si la dejas vacía, igual funciona el resultado y el WhatsApp)
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbzoWXcXGkU77JFWpyWmXr23kbRRYCVjedN5EtfyyvKoDFH5j_zAAhagv345kzMwDcI/exec"; // <-- PEGA la URL /exec de tu Apps Script (si la dejas vacía, igual funciona el resultado y el WhatsApp)
 const WA = "584125205727";
 const ORIGEN = "Diagnóstico médicos";
 /* ============================ */
 
 function init(fn){ try{ fn(); }catch(e){ console.error(e); } }
+
+// Valida un nombre real (solo letras, acentos, ñ, espacios y . ' -)
+function esNombre(s){
+  s=(s||'').trim();
+  if(s.length<2) return false;
+  if(!/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ.'\- ]+$/.test(s)) return false;
+  return (s.match(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/g)||[]).length>=2;
+}
+// Valida y normaliza un número de Venezuela. Devuelve 0XXXXXXXXXX o null.
+function vefono(raw){
+  var d=(raw||'').replace(/\D/g,'');
+  if(d.indexOf('58')===0) d=d.slice(2);
+  else if(d.indexOf('0')===0) d=d.slice(1);
+  if(d.length!==10) return null;
+  var movil=/^4(12|14|16|24|26)\d{7}$/.test(d); // Digitel, Movistar, Movilnet
+  var fijo=/^2\d{9}$/.test(d);                   // teléfono fijo (02xx)
+  return (movil||fijo) ? '0'+d : null;
+}
 
 const STEPS = 8; // 7 preguntas + contacto
 let cur = 0;
@@ -294,11 +312,12 @@ function setupQuiz(){
   form.addEventListener('submit', (e)=>{
     e.preventDefault();
     const nombre = form.nombre.value.trim();
-    const wa = form.whatsapp.value.trim();
     const cErr = document.getElementById('cErr');
-    if(nombre.length<2 || wa.replace(/\D/g,'').length<7){ cErr.classList.add('show'); return; }
+    if(!esNombre(nombre)){ cErr.textContent='Escribe tu nombre real (solo letras).'; cErr.classList.add('show'); form.nombre.focus(); return; }
+    const tel = vefono(form.whatsapp.value);
+    if(!tel){ cErr.textContent='Escribe un número venezolano válido, por ejemplo 0412 1234567.'; cErr.classList.add('show'); form.whatsapp.focus(); return; }
     cErr.classList.remove('show');
-    finish(nombre, wa);
+    finish(nombre, tel);
   });
 
   render();
