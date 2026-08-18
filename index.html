@@ -582,7 +582,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.7);padding:48px 0 34px;tex
 
 <script>
 const WA = "584125205727";
-const FORM_ENDPOINT = ""; // <-- PEGA AQUÍ tu enlace de Formspree o Google Apps Script (si lo dejas vacío, igual muestra el mensaje de éxito)
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwnSv09GcjPb4riLrQDfkKvkFkvReZ9XILTWL4Pl6T1muAvblCPLNu2zVeT2gdS_1Ok/exec"; // <-- PEGA AQUÍ tu enlace de Formspree o Google Apps Script (si lo dejas vacío, igual muestra el mensaje de éxito)
 
 function init(fn){ try{ fn(); }catch(e){ console.error(e); } }
 
@@ -678,9 +678,12 @@ function setupForm(){
     if(!valid){ err.classList.add('show'); return; }
     err.classList.remove('show');
     const data = Object.fromEntries(new FormData(form).entries());
+    data.origen = 'Landing Nexus';
     try{
       if(FORM_ENDPOINT){
-        await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+        const bd = JSON.stringify(data);
+        if(navigator.sendBeacon){ navigator.sendBeacon(FORM_ENDPOINT, new Blob([bd],{type:'text/plain;charset=UTF-8'})); }
+        else { fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:bd,keepalive:true}); }
       }
     }catch(e2){ console.error(e2); }
     form.style.display = 'none';
