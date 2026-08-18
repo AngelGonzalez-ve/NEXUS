@@ -94,6 +94,13 @@ input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,9
 .offerbox .price{font-family:'Sora';font-weight:800;font-size:2.6rem;color:var(--navy);line-height:1}
 .offerbox .price small{font-size:.95rem;font-weight:600;color:var(--muted)}
 .offerbox .ps{color:var(--muted);font-size:.92rem;margin-top:4px}
+.offerbox .market-ref{margin-bottom:8px}
+.offerbox .mlbl{display:block;font-size:.82rem;color:var(--muted)}
+.offerbox .mamt{font-family:'Sora';font-weight:700;font-size:1.6rem;color:var(--muted);
+  text-decoration:line-through;text-decoration-color:rgba(220,60,60,.55);text-decoration-thickness:2px}
+.offerbox .ps2{font-family:'Sora';font-size:.78rem;color:var(--blue);font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;margin-top:12px;margin-bottom:2px}
+.offerbox .mnote{font-size:.78rem;color:var(--muted);margin-top:14px}
 .offerbox ul{list-style:none;padding:0;margin:18px auto 22px;max-width:360px;text-align:left;display:grid;gap:9px}
 .offerbox li{display:flex;gap:10px;align-items:flex-start;font-size:.96rem}
 .offerbox li svg{flex:0 0 auto;width:20px;height:20px;color:#12B886;margin-top:3px}
@@ -232,7 +239,12 @@ input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,9
     </div>
     <div class="offerbox">
       <span class="tag">Oferta de fundador</span>
-      <div class="price">$100 <small>pago único</small></div>
+      <div class="market-ref">
+        <span class="mlbl">Lo que cuesta una web así en el mercado</span>
+        <span class="mamt">$900</span>
+      </div>
+      <div class="ps2">Tu precio de fundador</div>
+      <div class="price">$150 <small>pago único</small></div>
       <div class="ps">+ $20/mes de mantenimiento, congelado de por vida</div>
       <ul>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Web profesional para médicos, que genera confianza.</li>
@@ -241,6 +253,7 @@ input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,9
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Solo para mis primeros 3 clientes fundadores.</li>
       </ul>
       <a class="btn btn-wa" id="waBtn" href="#" target="_blank" rel="noopener">Quiero recuperar esos pacientes</a>
+      <p class="mnote">Precio de mercado referencial según tarifas web en Venezuela (2026).</p>
     </div>
     <p class="foot">¿Prefieres verlo con calma primero? <a href="index.html">Mira todo lo que incluye aquí.</a></p>
   </div>
@@ -373,7 +386,7 @@ function finish(nombre, wa){
 
   const esp = (answers.especialidad && answers.especialidad.label) || 'médico';
   const dinero = (precio>0 && money>0) ? (' (~'+money$(money)+'/mes)') : '';
-  const msg = 'Hola Nexus, soy '+nombre+' ('+esp+'). Hice el diagnóstico: estoy dejando ~'+lost+' pacientes nuevos al mes'+dinero+'. Quiero mi web + sistema de captación por $100 🚀';
+  const msg = 'Hola Nexus, soy '+nombre+' ('+esp+'). Hice el diagnóstico: estoy dejando ~'+lost+' pacientes nuevos al mes'+dinero+'. Quiero mi web + sistema de captación por $150 🚀';
   document.getElementById('waBtn').href = 'https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
 
   const payload = {
